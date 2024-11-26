@@ -12,4 +12,9 @@ int ft_printf(const char *format, ...);
 
 //function to print a char
 void ft_putchar(char c);
+
+//function to print an unsigned int
+void ft_putnbr_unsigned(n);
+
+
 #endif
