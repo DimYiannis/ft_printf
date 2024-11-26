@@ -41,12 +41,28 @@ int ft_printf(const char *format, ...)
                 }
                 count += i;
             }
-            else if (format[n] == 'd')
+            else if (format[n] == 'd' || format[n]=='i')
             {
                 int num = va_arg(args, int);
                 ft_putnbr(num);
                 count++;
             }
+            else if (format[n] == 'c' )
+            {
+                char c = va_arg(args, int); // char is promoted to int in variadic functions
+                ft_putchar(c);
+                count++;
+            }
+            else if (format[n == 'u'])
+            {
+               unsigned int num = va_arg(args, unsigned int);
+               ft_putnbr_unsigned(num);
+               count++;
+            }
+            
+            
+            
+            
         }
         n++;
     }

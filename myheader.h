@@ -10,4 +10,6 @@ void ft_putnbr(int n);
 // Function to print a formatted string
 int ft_printf(const char *format, ...);
 
+//function to print a char
+void ft_putchar(char c);
 #endif
