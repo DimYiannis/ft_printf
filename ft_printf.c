@@ -59,8 +59,25 @@ int ft_printf(const char *format, ...)
                ft_putnbr_unsigned(num);
                count++;
             }
-            
-            
+            else if (format[n] == 'x' || format[n] == 'X')
+            {
+                unsigned int num = va_arg(args, unsigned int);
+                if (format[n] == 'x')
+                {
+                    ft_putnbr_base(num,16,0);
+                }
+                else
+                {
+                    ft_putnbr_base(num,16,1);
+                }
+                count++;
+            }
+            else if (format[n]== 'p')
+            {
+                void *ptr = va_arg(args, void *);
+                ft_putstr("0x");
+                
+            }
             
             
         }
