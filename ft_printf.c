@@ -32,20 +32,18 @@ int ft_printf(const char *format, ...)
 // We expect this argument to be a string (char *), so we cast it accordingly.
 // The value of 'str' will be the pointer to the string passed to the ft_printf function.
                 char *str = va_arg(args, char *);
-                int i = 0;
-// Print the string using array indexing to traverse each character
-                while (str[i])
+                if (!str)
                 {
-                    ft_putchar(str[i]);
-                    i++;
+                    str = "(null)";
                 }
-                count += i;
+                ft_putstr(str);
+                count += ft_strlen(str);
             }
             else if (format[n] == 'd' || format[n]=='i')
             {
                 int num = va_arg(args, int);
                 ft_putnbr(num);
-                count++;
+                count += ft_intlen(num);
             }
             else if (format[n] == 'c' )
             {
@@ -53,11 +51,11 @@ int ft_printf(const char *format, ...)
                 ft_putchar(c);
                 count++;
             }
-            else if (format[n == 'u'])
+            else if (format[n] == 'u')
             {
                unsigned int num = va_arg(args, unsigned int);
                ft_putnbr_unsigned(num);
-               count++;
+                count += ft_uintlen(num);
             }
             else if (format[n] == 'x' || format[n] == 'X')
             {
@@ -70,20 +68,24 @@ int ft_printf(const char *format, ...)
                 {
                     ft_putnbr_base(num,16,1);
                 }
-                count++;
+                count+= ft_base_len(num,16);
             }
             else if (format[n]== 'p')
             {
                 void *ptr = va_arg(args, void *);
                 ft_putstr("0x");
-                
+                count += 2;
+                ft_putnbr_base((unsigned long)ptr, 16,0);
+                count += ft_base_len((unsigned long)ptr, 16);
             }
-            
-            
+            else if (format[n] == '%') // Literal '%'
+            {
+                ft_putchar('%');
+                count++;
+            }
         }
         n++;
     }
-
     // Once finished -> clean up the object initialized by calling va_start.
     // va_end can modify the object, which is called "args"
     //  so that it is no longer usable.
